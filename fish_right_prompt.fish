@@ -3,7 +3,7 @@
 function fish_right_prompt -d "Right side prompt message"
 
     # A dark grey
-    set --local dark_grey 555
+    set --local dark_grey e4e4e4
 
     set_color $dark_grey
 
@@ -18,7 +18,13 @@ end
 function show_virtualenv_name -d "Display the name of the current virtualenv"
 
     if set -q VIRTUAL_ENV
-        echo -en "["(basename "$VIRTUAL_ENV")"] "
+        set_color blue
+        echo -en "["
+        set_color yellow
+        echo (basename "$VIRTUAL_ENV")
+        set_color blue
+        echo "] "
+        set_color normal
     end
 end
 
@@ -48,6 +54,8 @@ function show_git_info -d "Show git repository information"
 
     # Prints git repository status
     echo -en "("
+    set_color 8affef
     echo -en (git_branch_name)$dirty
+    set_color normal
     echo -en ") "
 end

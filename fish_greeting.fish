@@ -14,7 +14,7 @@ function fish_greeting -d "Greeting message on shell session start up"
     echo -en "  |,-'--|--'-.|   " (show_net_info) "\n"
     echo ""
     set_color grey
-    echo "Have a nice trip"
+    fortune
     set_color normal
 end
 
@@ -49,7 +49,8 @@ function show_os_info -d "Prints operating system info"
     set_color yellow
     echo -en "\tOS: "
     set_color 0F0  # green
-    echo -en (uname -sm)
+    #echo -en (uname -sm)
+    echo "MacBook Air (13-inch, Mid 2013)"
     set_color normal
 end
 

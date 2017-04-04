@@ -19,9 +19,9 @@ function show_virtualenv_name -d "Display the name of the current virtualenv"
 
     if set -q VIRTUAL_ENV
         set_color blue
-        echo -en "["
+        echo "["
         set_color yellow
-        echo (basename "$VIRTUAL_ENV")
+        echo -en (basename "$VIRTUAL_ENV")
         set_color blue
         echo "] "
         set_color normal
@@ -40,22 +40,24 @@ function show_git_info -d "Show git repository information"
     # If there is modifications, set repository dirty to '*'
     if not [ -z (echo "$git_status" | grep -e '^ M') ]
         set dirty "*"
-    end
+    #end
 
     # If there is new or deleted files, add  '+' to dirty
-    if not [ -z (echo "$git_status" | grep -e '^[MDA]') ]
+    else if not [ -z (echo "$git_status" | grep -e '^[MDA]') ]
         set dirty "$dirty+"
-    end
+    #end
 
     # If there is stashed modifications on repository, add '^' to dirty
-    if not [ -z (git stash list) ]
-        set dirty "$dirty^"
+    #if not [ -z (git stash list) ]
+    #    set dirty "$dirty^"
+    #send
+    else
+      set dirty "$dirty✓"
     end
-
     # Prints git repository status
-    echo -en "("
+    echo "("
     set_color 8affef
     echo -en (git_branch_name)$dirty
     set_color normal
-    echo -en ") "
+    echo  ") "
 end

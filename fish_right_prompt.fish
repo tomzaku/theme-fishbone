@@ -6,12 +6,13 @@ function fish_right_prompt -d "Right side prompt message"
     set --local dark_grey e4e4e4
 
     set_color $dark_grey
-
+    echo -en "\033[1A"
     show_virtualenv_name
     show_git_info
     echo -en (date +%H:%M:%S)
 
     set_color normal
+    echo -en "\033[1B"
 end
 
 

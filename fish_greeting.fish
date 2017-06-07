@@ -58,27 +58,11 @@ end
 function show_cpu_info -d "Prints iformation about cpu"
 
     set --local os_type (uname -s)
-    set --local cpu_info ""
-
-    if [ "$os_type" = "Linux" ]
-
-        set --local procs_n (grep -c "^processor" /proc/cpuinfo)
-        set --local cores_n (grep "cpu cores" /proc/cpuinfo | head -1 | cut -d ":"  -f2 | tr -d " ")
-        set --local cpu_type (grep "model name" /proc/cpuinfo | head -1 | cut -d ":" -f2)
-        set cpu_info "$procs_n processors, $cores_n cores, $cpu_type"
-
-    else if [ "$os_type" = "Darwin" ]
-
-        set --local procs_n (system_profiler SPHardwareDataType | grep "Number of Processors" | cut -d ":" -f2 | tr -d " ")
-        set --local cores_n (system_profiler SPHardwareDataType | grep "Cores" | cut -d ":" -f2 | tr -d " ")
-        set --local cpu_type (system_profiler SPHardwareDataType | grep "Processor Name" | cut -d ":" -f2 | tr -d " ")
-        set cpu_info "$procs_n processors, $cores_n cores, $cpu_type"
-    end
-
     set_color yellow
     echo -en "\tCPU: "
     set_color 0F0  # green
-    echo -en $cpu_info
+    #echo -en $cpu_info
+    echo -en "1 processors, 4 cores, IntelCorei7"
     set_color normal
 end
 
@@ -86,19 +70,13 @@ end
 function show_mem_info -d "Prints memory information"
 
     set --local os_type (uname -s)
-    set --local total_memory ""
 
-    if [ "$os_type" = "Linux" ]
-        set total_memory (free -h | grep "Mem" | cut -d " " -f 12)
-
-    else if [ "$os_type" = "Darwin" ]
-        set total_memory (system_profiler SPHardwareDataType | grep "Memory:" | cut -d ":" -f 2 | tr -d " ")
-    end
 
     set_color yellow
     echo -en "\tMemory: "
     set_color 0F0  # green
-    echo -en $total_memory
+    #echo -en $total_memory
+    echo -en "8GB"
     set_color normal
 end
 
